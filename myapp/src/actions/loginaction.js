@@ -1,9 +1,11 @@
 import { GET_USERS, LOGIN_LOADING, VALID_USER, UPDATE_USER, LOG_OUT, ADD_USER, LOCKOROPEN_USER } from './types';
 import axios from 'axios';
 
+const herukoUrl = "http://cinema-ws.herokuapp.com/api/auth"
+
 export const getUsers = () => dispatch => {
     dispatch(setLoginLoading());
-    axios.get('http://localhost:9000/api/auth')
+    axios.get(herukoUrl || 'http://localhost:9000/api/auth')
         .then(res =>
             dispatch({
                 type: GET_USERS,
@@ -22,7 +24,7 @@ export const validUser = obj => {
 
 export const updateUser = (id, obj) => dispatch => {
     dispatch(setLoginLoading());
-    axios.put('http://localhost:9000/api/auth', id, obj)
+    axios.put(herukoUrl || 'http://localhost:9000/api/auth', id, obj)
         .then(res =>
             dispatch({
                 type: UPDATE_USER,
@@ -33,7 +35,7 @@ export const updateUser = (id, obj) => dispatch => {
 
 export const addUser = (obj) => dispatch => {
     dispatch(setLoginLoading());
-    axios.post('http://localhost:9000/api/auth', obj)
+    axios.post(herukoUrl || 'http://localhost:9000/api/auth', obj)
         .then(res => dispatch({
             type: ADD_USER,
             payload: obj
@@ -54,14 +56,14 @@ export const logout = () => {
     }
 }
 
-export const lockoropenuser = (session,Boolean) => dispatch => {
+export const lockoropenuser = (session, Boolean) => dispatch => {
     setTimeout(() => {
-           dispatch({
-        type: LOCKOROPEN_USER,
-        payload: Boolean
-    })
+        dispatch({
+            type: LOCKOROPEN_USER,
+            payload: Boolean
+        })
     }, session);
- 
+
 }
 
 export const unlockUser = () => {
