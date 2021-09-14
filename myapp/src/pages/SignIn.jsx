@@ -50,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const herukoAutUrl = "http://cinema-ws.herokuapp.com/api/auth"
+const herukoPermissionsUrl = "http://cinema-ws.herokuapp.com/api/permissions"
+const herukoUsersUrl = "http://cinema-ws.herokuapp.com/api/users"
+
 function SignIn(props) {
 
   const [name, setName] = useState("");
@@ -57,7 +61,7 @@ function SignIn(props) {
   const [displayErr, setDisplayErr] = useState("");
 
   const getUser = async () => {
-    let res = await axios("http://localhost:9000/api/users");
+    let res = await axios(herukoUsersUrl || "http://localhost:9000/api/users");
     let currentUser;
     try {
       let user = res.data.filter((user) => user.FirstName === name);
@@ -82,9 +86,10 @@ function SignIn(props) {
     props.history.push(`mainpage/${name}`);
   }
 
+
   const getPermissions = (id) => {
     return new Promise((resolve, reject) => {
-      axios(`http://localhost:9000/api/permissions/${id}`).then(res => resolve(res.data)).catch(err => {
+      axios(herukoPermissionsUrl || `http://localhost:9000/api/permissions/${id}`).then(res => resolve(res.data)).catch(err => {
         if(err){
           console.log('err')
         }
@@ -95,7 +100,7 @@ function SignIn(props) {
 
 
   onsubmit = async () => {
-    let res = await axios.get("http://localhost:9000/api/auth");
+    let res = await axios.get(herukoAutUrl || "http://localhost:9000/api/auth");
     if (res.status === 200) {
       let users = res.data;
       let validname = users.filter((user) => user.UserName === name);
