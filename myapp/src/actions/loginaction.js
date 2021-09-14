@@ -1,7 +1,7 @@
 import { GET_USERS, LOGIN_LOADING, VALID_USER, UPDATE_USER, LOG_OUT, ADD_USER, LOCKOROPEN_USER } from './types';
 import axios from 'axios';
 
-const herukoUrl = "http://cinema-ws.herokuapp.com/api/auth"
+const herukoUrl = "https://cinema-ws.herokuapp.com/api/auth"
 
 export const getUsers = () => dispatch => {
     dispatch(setLoginLoading());

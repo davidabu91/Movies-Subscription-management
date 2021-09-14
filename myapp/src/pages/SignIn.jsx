@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const herukoAutUrl = "http://cinema-ws.herokuapp.com/api/auth"
-const herukoPermissionsUrl = "http://cinema-ws.herokuapp.com/api/permissions"
-const herukoUsersUrl = "http://cinema-ws.herokuapp.com/api/users"
+const herukoAutUrl = "https://cinema-ws.herokuapp.com/api/auth"
+const herukoPermissionsUrl = "https://cinema-ws.herokuapp.com/api/permissions"
+const herukoUsersUrl = "https://cinema-ws.herokuapp.com/api/users"
 
 function SignIn(props) {
 
