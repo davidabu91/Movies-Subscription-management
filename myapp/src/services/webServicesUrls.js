@@ -1,0 +1,12 @@
+export const localUsersUrl = "http://localhost:9000/api/users";
+export const localAuthUrl = "http://localhost:9000/api/auth";
+export const localPermissionsUrl = "http://localhost:9000/api/permissions";
+export const localStartsUrl = "http://localhost:8000/api/start";
+export const herukoAutUrl = "https://cinema-ws.herokuapp.com/api/auth";
+export const herukoPermissionsUrl = "https://cinema-ws.herokuapp.com/api/permissions";
+export const herukoUsersUrl = "https://cinema-ws.herokuapp.com/api/users";
+export const herukoStartUrl = "https://subscriptions-web-server.herokuapp.com/api/start"
+export const herukoDestroyUrl = "https://subscriptions-web-server.herokuapp.com/api"
+export const localdestroyUrl = "http://localhost:8000/api";
+export const herukoCinemaWSUrl = "https://cinema-ws.herokuapp.com/api";
+export const localCinemaWSUrl = "http://localhost:9000/api";

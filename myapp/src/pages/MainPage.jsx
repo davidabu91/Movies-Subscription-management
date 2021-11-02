@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import styled from 'styled-components';
+import img from '../assets/images/bg-app.jpg'
 import { connect } from "react-redux";
 import { lockoropenuser } from "../actions/loginaction";
 import {getAllUsers} from '../actions/usersactions'
 import {getAllMovies} from '../actions/moviesaction'
+
+const Content = styled.div`
+border: 1px solid #000;
+`
 
 
 function MainPage(props) {
@@ -21,7 +27,7 @@ function MainPage(props) {
 
   return (
     <div >
-      <h3>Main Page</h3>
+      <Content/>
     </div>
   );
 }

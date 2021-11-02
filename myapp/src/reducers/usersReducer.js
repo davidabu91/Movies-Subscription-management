@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ALL_USERS, ADD_USER, DELETE_USER, USERS_LOADING } from '../actions/types'
+import { GET_ALL_USERS, ADD_USER, DELETE_USER, USERS_LOADING, SET_USERS } from '../actions/types'
 
 
 const initialState = {
@@ -35,6 +35,11 @@ export default function usersReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: true
+            }
+        case SET_USERS:
+            return {
+                ...state,
+                allUsers: []
             }
         default:
             return state;

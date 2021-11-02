@@ -1,6 +1,8 @@
 import "./App.css";
 import { Provider } from "react-redux";
 import { Switch,  Route } from "react-router-dom";
+import { useEffect } from "react";
+import {initialDataApp} from './services/start';
 import store from "./store";
 import Header from "./pages/Header";
 import MainPage from './pages/MainPage';
@@ -13,6 +15,12 @@ import TimeOutModal from './components/TimeOutModal'
 
 
 function App() {
+
+
+  useEffect(() => {
+    initialDataApp()
+  }, []);
+
   return (
     <Provider store={store}>
       <div className="App">
@@ -26,6 +34,7 @@ function App() {
             <Route exact path='/mainpage/:name/logout' component={LogOut}/>
             <Route exact path='/mainpage/:name/management' component={ManageUsers}/>
           </Switch>
+       
    
       </div>
     </Provider>

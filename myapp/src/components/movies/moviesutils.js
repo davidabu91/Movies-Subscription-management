@@ -1,9 +1,11 @@
 import axios from 'axios'
 
+const herukoUrl = "https://cinema-ws.herokuapp.com/api/movies"
+
 export function getAll() {
     return new Promise((resolve, reject) => {
         console.log("get movies list from movies db")
-        axios('http://localhost:9000/api/movies')
+        axios(herukoUrl || 'http://localhost:9000/api/movies')
             .then(res => resolve(res.data))
             .catch(err => reject(err))
 
@@ -25,7 +27,7 @@ export function add() {
 export function deleteItem(id) {
     return new Promise((resolve, reject) => {
         console.log('delete item from movies db')
-        axios.delete('http://localhost:9000/api/movies/' + id)
+        axios.delete(herukoUrl || 'http://localhost:9000/api/movies/' + id)
             .then(res => console.log(res.data, "deleted"))
             .catch(err => console.log(err))
     })

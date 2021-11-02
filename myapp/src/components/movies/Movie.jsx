@@ -13,8 +13,12 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
-  },
+    border: "1px solid",
+    borderRadius: "10px",
+    padding: "10px 20px",
+    width: "70%",
+    marginTop: "20px",
+    boxShadow: "0 5px 20px 1px rgba(0, 0, 0, 0.5)",  },
   btn: {
     fontSize: 14,
     display: "flex",
@@ -30,19 +34,13 @@ const useStyles = makeStyles({
 
   },
   container:{
-    maxWidth: "80%",
     border: "1px solid #2F4F4F",
-    backgroundColor: "#F8F8FF"
+    borderRadius: "10px",
+
+    backgroundColor: "#F8F8FF",
+    width: "100%",
 
   },
-  // img:{
-  //   marginBottom: 12,
-  //   display: "flex",
-  //   justifyContent: "spaceBetween",
-  //   // alignItems: "center",
-  //   marginTop: 12,
-
-  // },
   p:{
     marginLeft:"20px"
   }

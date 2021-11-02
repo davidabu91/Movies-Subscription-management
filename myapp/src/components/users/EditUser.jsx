@@ -31,6 +31,11 @@ function EditUser(props) {
   const [userId, setUserId] = useState("");
   const [checkedState, setCheckedState] = useState([]);
 
+  const herukoAutUrl = "https://cinema-ws.herokuapp.com/api/auth"
+  const herukoPermissionsUrl = "https://cinema-ws.herokuapp.com/api/permissions"
+  const herukoUsersUrl = "https://cinema-ws.herokuapp.com/api/users"
+
+
 
   const permissionsItems = [
     { value: "View Subscriptions", name: "ViewSubscriptions" },
@@ -80,7 +85,7 @@ function EditUser(props) {
   const updateUsername = (password) => {
     return new Promise((resolve, reject) => {
       let objA = { name: userName, password: password };
-      axios.put(`http://localhost:9000/api/auth/${userId}`, objA).then(res => {
+      axios.put(herukoAutUrl+'/'+userId || `http://localhost:9000/api/auth/${userId}`, objA).then(res => {
         if(res.status === 200){
           resolve(res.data)
         } else{
@@ -103,7 +108,7 @@ function EditUser(props) {
         index: props.item.index
       };
       axios
-        .put(`http://localhost:9000/api/users/${userId}`, obj)
+        .put(herukoUsersUrl+'/'+userId || `http://localhost:9000/api/users/${userId}`, obj)
         .then((res) => {
           if (res.status === 200) {
             resolve(res.data);
@@ -124,7 +129,7 @@ function EditUser(props) {
       permission: permissionsArr,
     };
 
-     axios.put(
+     axios.put(herukoPermissionsUrl+'/'+userId ||
       `http://localhost:9000/api/permissions/${userId}`,
       obj
     ).then(res => {
@@ -139,50 +144,11 @@ function EditUser(props) {
 
 
   const editUser = async () => {
-    let authData = await axios.get(`http://localhost:9000/api/auth/${userId}`);
-    // console.log(authData.data.Password);
+    let authData = await axios.get(herukoAutUrl+'/'+userId || `http://localhost:9000/api/auth/${userId}`);
     await updateUsername(authData.data.Password);
     await updateUser();
     await updatePermissions();
-    //A.save usernaem in usersDB:
-    //..1)addUser function
-    // await addUsername()
 
-    //..2)getUSer function that given _id from usersDB
-    // let res = await axios.get("http://localhost:9000/api/auth");
-    // console.log(res);
-    // let users = res.data;
-    // let user = users.filter((x) => x.UserName === userName);
-    // console.log(user);
-
-    //B. save details in json file:
-    //..1) users.json
-
-    // let objB = {
-    //   _id: props.item._id,
-    //   FirstName: firstName,
-    //   LastName: lastName,
-    //   DateCreated: DateCreated,
-    //   SessionTimeOut: timeOut,
-    // };
-    // let res = await axios.put(
-    //   `http://localhost:9000/api/users/${userId}`,
-    //   objB
-    // );
-
-    //..2) permitions.json
-    // let permissionsArr = permissionsItems
-    //   .filter((item, index) => checkedState[index] === true)
-    //   .map((item) => item.value);
-    // let permissionsObj = {
-    //   _id: props.item._id,
-    //   permission: permissionsArr,
-    // };
-
-    // await axios.put(
-    //   `http://localhost:9000/api/permissions/${userId}`,
-    //   permissionsObj
-    // );
     props.getAllUsers();
     setOpen(false);
   };

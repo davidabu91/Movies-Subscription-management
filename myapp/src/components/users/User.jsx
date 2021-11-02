@@ -6,20 +6,22 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import EditUser from './EditUser';
-// import { connect } from "react-redux";
-// import {deleteUsers} from '../actions/usersactions'
-
+import EditUser from "./EditUser";
+import {
+  herukoPermissionsUrl,
+  localPermissionsUrl,
+} from "../../services/webServicesUrls";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
+   
+    border: "1px solid",
+    borderRadius: "10px",
+    padding: "10px 20px",
+    width: "70%",
+    marginBottom: "15px",
+    boxShadow: "0 5px 20px 1px rgba(0, 0, 0, 0.5)",
   },
-  //   bullet: {
-  //     display: 'inline-block',
-  //     margin: '0 2px',
-  //     transform: 'scale(0.8)',
-  //   },
   title: {
     fontSize: 14,
   },
@@ -30,31 +32,35 @@ const useStyles = makeStyles({
 
 export default function User({ item, deleteUser }) {
   useEffect(() => {
-    axios(`http://localhost:9000/api/permissions/${item._id}`).then((res) => {
+    axios(
+      herukoPermissionsUrl + "/" + item._id ||
+        `${localPermissionsUrl}/${item._id}`
+    ).then((res) => {
       setPermission(res.data.permission);
       let checked = [];
-      
+
       arrPermissions.map((item) => {
-        res.data.permission.includes(item) ? checked.push(true) : checked.push(false)
+        res.data.permission.includes(item)
+          ? checked.push(true)
+          : checked.push(false);
       });
-      setCheckedPermissions(checked)
+      setCheckedPermissions(checked);
     });
   }, [item]);
 
-  const [checkedPermissions, setCheckedPermissions] = useState([])
-
+  const [checkedPermissions, setCheckedPermissions] = useState([]);
 
   const arrPermissions = [
-    'View Subscriptions',
-    'Create Subscriptions',
-    'Delete Subscriptions',
-    'Update Subscriptions',
-    'View Movies',
-    'Create Movies',
-    'Delete Movies',
-    'Update Movies'
-  ]
-  
+    "View Subscriptions",
+    "Create Subscriptions",
+    "Delete Subscriptions",
+    "Update Subscriptions",
+    "View Movies",
+    "Create Movies",
+    "Delete Movies",
+    "Update Movies",
+  ];
+
   const [permissions, setPermission] = useState([]);
   const classes = useStyles();
   //   const bull = <span className={classes.bullet}>•</span>;
@@ -79,11 +85,15 @@ export default function User({ item, deleteUser }) {
         <Typography className={classes.pos} color="textSecondary">
           {`permissions : ${permissions}`}
         </Typography>
- 
       </CardContent>
       <CardActions>
-
-        <Button size="small"><EditUser item={item} permissions={permissions} checkedPermissions={checkedPermissions}/></Button>
+        <Button size="small">
+          <EditUser
+            item={item}
+            permissions={permissions}
+            checkedPermissions={checkedPermissions}
+          />
+        </Button>
         <Button size="small" onClick={onDeleteClick}>
           Delete
         </Button>

@@ -1,16 +1,17 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { logout } from "../actions/loginaction";
+import { setEmptyUsersState } from "../actions/usersactions";
+import { setEmptyMoviesState } from "../actions/moviesaction";
 import { connect } from "react-redux";
 
 function LogOut (props) {
   function onclicklogout ()  {
       
-    let obj = {
-      name: props.auth.currentUser.name,
-      password: props.auth.currentUser.password,
-    };
+  
     props.logout();
+    props.setEmptyMoviesState();
+    props.setEmptyUsersState();
     props.history.push("/");
     console.log(props.history)
   };
@@ -27,4 +28,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logout })(LogOut);
+export default connect(mapStateToProps, { logout, setEmptyUsersState, setEmptyMoviesState })(LogOut);

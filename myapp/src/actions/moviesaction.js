@@ -1,4 +1,4 @@
-import { GET_ALL_MOVIES, GET_MOVIE, DELETE_MOVIES, ADD_MOVIES, EDIT_MOVIES } from '../actions/types'
+import { GET_ALL_MOVIES, GET_MOVIE, DELETE_MOVIES, ADD_MOVIES, EDIT_MOVIES, SET_MOVIES } from '../actions/types'
 import { getAll, deleteItem } from '../components/movies/moviesutils';
 
 
@@ -19,4 +19,10 @@ export const deleteMovie = () => {
         console.log('delete movie')
         dispatch({ type: DELETE_MOVIES, payload: response });
     };
+}
+
+export const setEmptyMoviesState = () => {
+    return {
+        type: SET_MOVIES
+    }
 }

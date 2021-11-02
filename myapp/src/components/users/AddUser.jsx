@@ -39,6 +39,11 @@ function AddUser(props) {
     { value: "Update Movies", name: "UpdateMovies" },
   ];
 
+  const herukoAutUrl = "https://cinema-ws.herokuapp.com/api/auth"
+  const herukoPermissionsUrl = "https://cinema-ws.herokuapp.com/api/permissions"
+  const herukoUsersUrl = "https://cinema-ws.herokuapp.com/api/users"
+  
+
   const [checkedState, setCheckedState] = useState(
     new Array(items.length).fill(false)
   );
@@ -69,7 +74,7 @@ function AddUser(props) {
   const addUsername = () => {
     return new Promise((resolve, reject) => {
       let objA = { name: userName };
-      axios.post("http://localhost:9000/api/auth", objA).then((res) => {
+      axios.post(herukoAutUrl || "http://localhost:9000/api/auth", objA).then((res) => {
         if (res.status === 200) {
           let validname = res.data.filter((user) => user.UserName === userName)
           validname.length > 0 ? alert('The name already exists, choose a different name') : resolve(res.data);
@@ -86,7 +91,7 @@ function AddUser(props) {
     await addUsername();
 
     //..2)getUSer function that given _id from usersDB
-    let res = await axios.get("http://localhost:9000/api/auth");
+    let res = await axios.get(herukoAutUrl || "http://localhost:9000/api/auth");
     console.log(res);
     let users = res.data;
     let user = users.filter((x) => x.UserName === userName);
@@ -111,7 +116,7 @@ function AddUser(props) {
       SessionTimeOut: SessionTimeOut,
       index: users.length
     };
-    axios.post("http://localhost:9000/api/users", objB);
+    axios.post(herukoUsersUrl || "http://localhost:9000/api/users", objB);
 
     //..2) permitions.json
     let permissionsArr = items
@@ -122,7 +127,7 @@ function AddUser(props) {
       permission: permissionsArr,
     };
 
-    axios.post("http://localhost:9000/api/permissions", permissionsObj);
+    axios.post(herukoPermissionsUrl || "http://localhost:9000/api/permissions", permissionsObj);
     props.getAllUsers();
     setOpen(false);
   };
