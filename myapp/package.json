@@ -2,11 +2,8 @@
     "name": "myapp",
     "version": "0.1.0",
     "engines": {
-<<<<<<< HEAD
-        "node": "14.13.0"
-=======
-        "node": "v14.13.0"
->>>>>>> 7f1c1fcfbceb074355ecba67e29cef09ba648299
+        "node": "14.13.0",
+        "npm": "7.20.6"
     },
     "private": true,
     "dependencies": {
